@@ -1,0 +1,27 @@
+<div id="output1">Searching NYT API for 'Apple'...<br></div>
+<div id="output2">Searching NYT API for 'Apple'...<br></div>
+<div id="output3">Searching NYT API for 'Apple'...<br></div>
+	
+
+<script>
+	var output1 = document.getElementById('output1');
+	var output2 = document.getElementById('output2');
+	
+	var hr = new XMLHttpRequest();
+var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=apple&api-key=01a8bfcd23b34497bfc8e4dac4c07718";
+hr.open("GET", url, true);
+hr.send();
+  
+	hr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			var myObj = JSON.parse(hr.responseText);
+			console.log(myObj);
+			output1.innerHTML = myObj.response.docs[0].headline.main;
+			output2.innerHTML = myObj.response.docs[1].headline.main;
+			output3.innerHTML = myObj.response.docs[2].headline.main;
+			
+		}
+	}
+  
+console.log(hr);	
+</script>
